@@ -11,19 +11,36 @@ fn main() {
     let user_input: u32 = user_input.trim().parse().expect("Please type a number");
 
     // Step 2: Apply the formula to the input, return the answer
-    let mut count = 1;
-    let mut result = 1;
-    loop {
-        result += user_input - count;
-        println!("Result : {result}");
-        count += 1;
-        if count == user_input {
-            println!("The {user_input}'th fibonacci number is: {result}");
-            break
-        }
-    }
+    calculate_fibonacci(user_input);
+    
 }
 
-fn calculate_fibonacci(n) {
-    // FIXME: Update logic and test results
+/* Output log
+
+Welcome to the nth_fibonacci finder!
+Please enter a numerical value for n to find the nth fibonacci
+4
+The 4th fibonacci is: -13
+
+thread 'main' panicked at src/main.rs:28:18:
+attempt to add with overflow
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+*/
+
+fn calculate_fibonacci(n: u32) -> () {
+    let mut counter = 0;
+    let mut result = 0;
+    loop {
+        if counter == 0 {
+            result = 0;
+        }
+        if counter == 1 {
+            result = 1;
+        }
+        result = result - 1 + result - 2;
+        counter += 1;
+         if counter == n {
+            println!("The {n}th fibonacci is: {result}")
+        }
+    }
 }
